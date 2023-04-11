@@ -29,7 +29,9 @@ class RepeatingTask extends Task implements Listener
         if (!is_array($internalConfig) or count($internalConfig) <= 0) return;
         foreach ($internalConfig as $value) {
             if(!is_array($value)) continue;
-            $players = $this->fj->getServer()->getWorldManager()->getWorldByName($value["level"])->getPlayers();
+            if ($world !== null && $this->fj->getServer()->getWorldManager()->isWorldLoaded($worldName)) {
+				$players = $world->getPlayers();
+			}	
             if ($players == []) continue;
             $x1 = $value["x"][0][0];
             $x2 = $value["x"][0][1];
